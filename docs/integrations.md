@@ -2,18 +2,18 @@
 
 > 📖 Back to [README](../README.md)
 
-Gentleman Guardian Angel works standalone with native git hooks, but you can also integrate it with popular hook managers and CI/CD pipelines.
+NuevoViruz Guardian works standalone with native git hooks, but you can also integrate it with popular hook managers and CI/CD pipelines.
 
 ---
 
 ## Native Git Hook (Default)
 
-This is what `gga install` does automatically:
+This is what `nvg install` does automatically:
 
 ```bash
 # .git/hooks/pre-commit
 #!/usr/bin/env bash
-gga run || exit 1
+nvg run || exit 1
 ```
 
 ---
@@ -37,8 +37,8 @@ Edit `.husky/pre-commit`:
 ```bash
 #!/usr/bin/env bash
 
-# Run Gentleman Guardian Angel
-gga run || exit 1
+# Run NuevoViruz Guardian
+nvg run || exit 1
 
 # Your other checks (optional)
 npm run lint
@@ -71,7 +71,7 @@ npm install -D husky lint-staged
 #!/usr/bin/env bash
 
 # AI Review first (uses git staged files internally)
-gga run || exit 1
+nvg run || exit 1
 
 # Then lint-staged for formatting
 npx lint-staged
@@ -97,12 +97,12 @@ Create `.pre-commit-config.yaml`:
 
 ```yaml
 repos:
-  # Gentleman Guardian Angel (runs first)
+  # NuevoViruz Guardian (runs first)
   - repo: local
     hooks:
-      - id: gga
-        name: Gentleman Guardian Angel
-        entry: gga run
+      - id: nvg
+        name: NuevoViruz Guardian
+        entry: nvg run
         language: system
         pass_filenames: false
         stages: [pre-commit]
@@ -137,7 +137,7 @@ pre-commit install
 pre-commit run --all-files
 
 # Run only AI review
-pre-commit run gga
+pre-commit run nvg
 ```
 
 ---
@@ -163,8 +163,8 @@ pre-commit:
   parallel: false
   commands:
     ai-review:
-      run: gga run
-      fail_text: "Gentleman Guardian Angel failed. Fix violations before committing."
+      run: nvg run
+      fail_text: "NuevoViruz Guardian failed. Fix violations before committing."
 
     lint:
       glob: "*.{ts,tsx,js,jsx}"
@@ -184,41 +184,41 @@ lefthook install
 
 ## 🖥️ VS Code / Antigravity Integration
 
-GGA works seamlessly with VS Code and [Antigravity](https://antigravity.google) (Google's AI-first IDE). Since GGA installs as a standard git hook, it runs automatically when you commit — regardless of which IDE or terminal you use.
+NVG works seamlessly with VS Code and [Antigravity](https://antigravity.google) (Google's AI-first IDE). Since NVG installs as a standard git hook, it runs automatically when you commit — regardless of which IDE or terminal you use.
 
 **Setup:**
 
 ```bash
 # 1. Open your project in VS Code or Antigravity
 # 2. Open the integrated terminal (Ctrl+`)
-# 3. Initialize and install GGA as usual
-gga init
-gga install
+# 3. Initialize and install NVG as usual
+nvg init
+nvg install
 
 # 4. Make sure your AI provider CLI is available in PATH
 which claude   # or gemini, codex, opencode
 ```
 
-That's it. When you commit via the Source Control panel (`Cmd+Enter` / `Ctrl+Enter`) or via `git commit` in the terminal, GGA's pre-commit hook fires and reviews your staged files.
+That's it. When you commit via the Source Control panel (`Cmd+Enter` / `Ctrl+Enter`) or via `git commit` in the terminal, NVG's pre-commit hook fires and reviews your staged files.
 
 **Tips for VS Code / Antigravity users:**
 
 - **Output visibility**: Hook output appears in the "Git" output channel. Open it via View → Output → select "Git" from the dropdown
 - **Bypass when needed**: Use `--no-verify` from the terminal: `git commit --no-verify -m "wip"`
-- **Antigravity users**: Antigravity includes Gemini built-in. Set `PROVIDER="gemini"` in your `.gga` config and ensure the `gemini` CLI is in your PATH. GGA works through git hooks — no IDE-specific configuration needed.
-- **Windows + VS Code**: VS Code may launch Git from a different shell profile than your terminal. Confirm `gga` is resolvable from inside VS Code with `where gga` (PowerShell/CMD) or `which gga` (Git Bash).
+- **Antigravity users**: Antigravity includes Gemini built-in. Set `PROVIDER="gemini"` in your `.nvg` config and ensure the `gemini` CLI is in your PATH. NVG works through git hooks — no IDE-specific configuration needed.
+- **Windows + VS Code**: VS Code may launch Git from a different shell profile than your terminal. Confirm `nvg` is resolvable from inside VS Code with `where nvg` (PowerShell/CMD) or `which nvg` (Git Bash).
 
 ---
 
 ## CI/CD Integration
 
-You can also run Gentleman Guardian Angel in your CI pipeline:
+You can also run NuevoViruz Guardian in your CI pipeline:
 
 ### GitHub Actions
 
 ```yaml
 # .github/workflows/ai-review.yml
-name: Gentleman Guardian Angel
+name: NuevoViruz Guardian
 
 on:
   pull_request:
@@ -232,11 +232,11 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install Gentleman Guardian Angel
+      - name: Install NuevoViruz Guardian
         run: |
-          git clone https://github.com/Gentleman-Programming/gentleman-guardian-angel.git /tmp/gga
-          chmod +x /tmp/gga/bin/gga
-          echo "/tmp/gga/bin" >> $GITHUB_PATH
+          git clone https://github.com/ING-Ricardo-Lopez/nuevoviruz-guardian.git /tmp/nvg
+          chmod +x /tmp/nvg/bin/nvg
+          echo "/tmp/nvg/bin" >> $GITHUB_PATH
 
       - name: Install Claude CLI
         run: |
@@ -248,27 +248,27 @@ jobs:
       - name: Run AI Review
         run: |
           # Review all files changed in the PR
-          gga run --pr-mode
+          nvg run --pr-mode
 
           # Or with diffs only (faster, cheaper)
-          # gga run --pr-mode --diff-only
+          # nvg run --pr-mode --diff-only
 ```
 
 ### GitLab CI
 
 ```yaml
 # .gitlab-ci.yml
-gga:
+nvg:
   stage: test
   image: ubuntu:latest
   before_script:
     - apt-get update && apt-get install -y git curl
-    - git clone https://github.com/Gentleman-Programming/gentleman-guardian-angel.git /opt/gga
-    - export PATH="/opt/gga/bin:$PATH"
+    - git clone https://github.com/ING-Ricardo-Lopez/nuevoviruz-guardian.git /opt/nvg
+    - export PATH="/opt/nvg/bin:$PATH"
     # Install your provider CLI here
   script:
     - git diff --name-only $CI_MERGE_REQUEST_DIFF_BASE_SHA | xargs git add
-    - gga run
+    - nvg run
   only:
     - merge_requests
 ```

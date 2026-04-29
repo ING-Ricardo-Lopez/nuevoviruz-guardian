@@ -2,7 +2,7 @@
 
 > 📖 Back to [README](../README.md)
 
-Everything you need to know about writing effective `AGENTS.md` coding standards files for GGA.
+Everything you need to know about writing effective `AGENTS.md` coding standards files for NVG.
 
 ---
 

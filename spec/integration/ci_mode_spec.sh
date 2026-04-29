@@ -15,12 +15,12 @@ Describe 'CI mode (--ci)'
     git commit -m "initial commit" --quiet
     
     # Create config and rules
-    echo 'PROVIDER="claude"' > .gga
+    echo 'PROVIDER="claude"' > .nvg
     echo "# Rules" > AGENTS.md
-    git add .gga AGENTS.md
+    git add .nvg AGENTS.md
     git commit -m "add config" --quiet
     
-    GGA_BIN="$PROJECT_ROOT/bin/gga"
+    NVG_BIN="$PROJECT_ROOT/bin/nvg"
   }
 
   cleanup() {
@@ -39,7 +39,7 @@ Describe 'CI mode (--ci)'
       git commit -m "add test file" --quiet
       
       # Run in CI mode - should find test.ts
-      When call "$GGA_BIN" run --ci
+      When call "$NVG_BIN" run --ci
       The output should include "test.ts"
       The output should include "CI (reviewing last commit)"
     End
@@ -53,10 +53,10 @@ Describe 'CI mode (--ci)'
       git commit -m "add files" --quiet
       
       # Update config to only review .ts files
-      echo 'PROVIDER="claude"' > .gga
-      echo 'FILE_PATTERNS="*.ts"' >> .gga
+      echo 'PROVIDER="claude"' > .nvg
+      echo 'FILE_PATTERNS="*.ts"' >> .nvg
       
-      When call "$GGA_BIN" run --ci
+      When call "$NVG_BIN" run --ci
       The output should include "file.ts"
       The output should not include "file.js"
       The output should not include "file.md"
@@ -64,10 +64,10 @@ Describe 'CI mode (--ci)'
 
     It 'shows warning when no matching files in last commit'
       # Last commit has AGENTS.md which doesn't match *.ts pattern
-      echo 'PROVIDER="claude"' > .gga
-      echo 'FILE_PATTERNS="*.ts"' >> .gga
+      echo 'PROVIDER="claude"' > .nvg
+      echo 'FILE_PATTERNS="*.ts"' >> .nvg
       
-      When call "$GGA_BIN" run --ci
+      When call "$NVG_BIN" run --ci
       The output should include "No matching files changed in last commit"
       The status should be success
     End
@@ -77,13 +77,13 @@ Describe 'CI mode (--ci)'
       git add test.ts
       git commit -m "add test" --quiet
       
-      When call "$GGA_BIN" run --ci
+      When call "$NVG_BIN" run --ci
       The output should include "disabled (CI mode)"
     End
   End
 
-  Describe 'GGA_CI_SOURCE_COMMIT handling'
-    It 'includes older changes when GGA_CI_SOURCE_COMMIT is set to include two commits'
+  Describe 'NVG_CI_SOURCE_COMMIT handling'
+    It 'includes older changes when NVG_CI_SOURCE_COMMIT is set to include two commits'
       # Commit A (older): add old.ts
       echo "old" > old.ts
       git add old.ts
@@ -94,13 +94,13 @@ Describe 'CI mode (--ci)'
       git add new.ts
       git commit -m "add new file" --quiet
 
-      # Run with GGA_CI_SOURCE_COMMIT set to include two commits back
-      When call env GGA_CI_SOURCE_COMMIT=HEAD~2 "$GGA_BIN" run --ci
+      # Run with NVG_CI_SOURCE_COMMIT set to include two commits back
+      When call env NVG_CI_SOURCE_COMMIT=HEAD~2 "$NVG_BIN" run --ci
       The output should include "old.ts"
       The output should include "new.ts"
     End
 
-    It 'only reviews last commit when GGA_CI_SOURCE_COMMIT is not set'
+    It 'only reviews last commit when NVG_CI_SOURCE_COMMIT is not set'
       # Commit A (older): add older.ts
       echo "older" > older.ts
       git add older.ts
@@ -111,8 +111,8 @@ Describe 'CI mode (--ci)'
       git add newer.ts
       git commit -m "add newer file" --quiet
 
-      # Run without GGA_CI_SOURCE_COMMIT - should only include the newest commit
-      When call "$GGA_BIN" run --ci
+      # Run without NVG_CI_SOURCE_COMMIT - should only include the newest commit
+      When call "$NVG_BIN" run --ci
       The output should include "newer.ts"
       The output should not include "older.ts"
     End
@@ -131,7 +131,7 @@ Describe 'CI mode (--ci)'
       git commit -m "delete file" --quiet
       
       # CI mode should not try to review the deleted file
-      When call "$GGA_BIN" run --ci
+      When call "$NVG_BIN" run --ci
       The output should not include "to_delete.ts"
     End
   End

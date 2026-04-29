@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ============================================================================
-# Gentleman Guardian Angel - Provider Functions
+# NuevoViruz Guardian - Provider Functions
 # ============================================================================
 # Handles execution for different AI providers:
 # - claude: Anthropic Claude Code CLI
@@ -674,13 +674,13 @@ execute_with_timeout() {
   shift 2
 
   local output_file
-  output_file=$(mktemp "${TEMP:-${TMPDIR:-/tmp}}/gga_timeout_out.XXXXXX")
+  output_file=$(mktemp "${TEMP:-${TMPDIR:-/tmp}}/nvg_timeout_out.XXXXXX")
   local exit_code_file
-  exit_code_file=$(mktemp "${TEMP:-${TMPDIR:-/tmp}}/gga_timeout_ec.XXXXXX")
+  exit_code_file=$(mktemp "${TEMP:-${TMPDIR:-/tmp}}/nvg_timeout_ec.XXXXXX")
 
   # Determine if we can use fancy spinner (TTY mode)
   local use_spinner=false
-  if [[ -t 2 ]] && [[ -z "${CI:-}" ]] && [[ -z "${GGA_NO_SPINNER:-}" ]]; then
+  if [[ -t 2 ]] && [[ -z "${CI:-}" ]] && [[ -z "${NVG_NO_SPINNER:-}" ]]; then
     use_spinner=true
   fi
 
@@ -728,7 +728,7 @@ execute_with_timeout() {
       echo "  - Provider API issues or rate limiting" >&2
       echo "" >&2
       echo "Solutions:" >&2
-      echo "  - Increase TIMEOUT in .gga config (current: ${timeout_seconds}s)" >&2
+      echo "  - Increase TIMEOUT in .nvg config (current: ${timeout_seconds}s)" >&2
       echo "  - Review fewer files at once" >&2
       echo "  - Check provider status/logs" >&2
 
@@ -763,7 +763,7 @@ execute_with_timeout() {
   fi
 
   # Trace mode: show internal state
-  if [[ -n "${GGA_TRACE:-}" ]]; then
+  if [[ -n "${NVG_TRACE:-}" ]]; then
     echo "[TRACE] exit_code=$exit_code" >&2
     echo "[TRACE] output_file=$output_file size=$(wc -c < "$output_file" 2>/dev/null || echo 0)" >&2
   fi

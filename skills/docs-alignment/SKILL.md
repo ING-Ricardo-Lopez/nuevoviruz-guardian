@@ -1,7 +1,7 @@
-# Skill: gga-docs-alignment
+# Skill: nvg-docs-alignment
 
 ## Purpose
-Keep documentation in sync with every code and workflow change in GGA.
+Keep documentation in sync with every code and workflow change in NVG.
 
 ## When to Use
 Any code or workflow change that affects user or contributor behavior.
@@ -23,7 +23,7 @@ Any code or workflow change that affects user or contributor behavior.
 | The label system | `CONTRIBUTING.md` |
 | Test structure or test commands | `CONTRIBUTING.md` |
 | Install/uninstall behavior | `README.md` |
-| The `.gga` config format | `README.md` |
+| The `.nvg` config format | `README.md` |
 | Hook behavior or marker format | `README.md` + `CONTRIBUTING.md` |
 | CI mode behavior (`--ci`) | `README.md` |
 

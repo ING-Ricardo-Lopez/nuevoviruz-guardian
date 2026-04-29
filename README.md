@@ -36,7 +36,7 @@
 
 You have coding standards. Your team ignores them. Code reviews catch issues too late.
 
-**GGA** runs on every commit, validating staged files against your `AGENTS.md`. Like having a senior developer review every line before it hits the repo.
+**NVG** runs on every commit, validating staged files against your `AGENTS.md`. Like having a senior developer review every line before it hits the repo.
 
 ```
 ┌─────────────────┐     ┌──────────────┐     ┌─────────────────┐
@@ -59,22 +59,22 @@ You have coding standards. Your team ignores them. Code reviews catch issues too
 ### Homebrew (recommended)
 
 ```bash
-brew install gentleman-programming/tap/gga
+brew install ing-ricardo-lopez/tap/nvg
 ```
 
 ### Manual
 
 ```bash
-git clone https://github.com/Gentleman-Programming/gentleman-guardian-angel.git
-cd gentleman-guardian-angel
+git clone https://github.com/ING-Ricardo-Lopez/nuevoviruz-guardian.git
+cd nuevoviruz-guardian
 ./install.sh
 ```
 
 ### Windows (Git Bash)
 
 ```bash
-git clone https://github.com/Gentleman-Programming/gentleman-guardian-angel.git
-cd gentleman-guardian-angel
+git clone https://github.com/ING-Ricardo-Lopez/nuevoviruz-guardian.git
+cd nuevoviruz-guardian
 bash install.sh
 echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 ```
@@ -87,9 +87,9 @@ echo 'export PATH="$HOME/bin:$PATH"' >> ~/.bashrc && source ~/.bashrc
 
 ```bash
 cd ~/your-project
-gga init                # Create .gga config
-gga install             # Install git hook
-# Edit .gga to set your PROVIDER
+nvg init                # Create .nvg config
+nvg install             # Install git hook
+# Edit .nvg to set your PROVIDER
 # Create AGENTS.md with your coding standards
 # Done — every commit gets reviewed 🎉
 ```
@@ -116,17 +116,17 @@ gga install             # Install git hook
 
 | Command | Description |
 |---------|------------|
-| `gga init` | Create sample `.gga` config |
-| `gga install` | Install pre-commit hook |
-| `gga install --commit-msg` | Install commit-msg hook |
-| `gga uninstall` | Remove hooks |
-| `gga run` | Review staged files |
-| `gga run --ci` | Review last commit (CI/CD) |
-| `gga run --pr-mode` | Review full PR changes |
-| `gga run --no-cache` | Review ignoring cache |
-| `gga config` | Show configuration |
-| `gga cache status` | Show cache info |
-| `gga version` | Show version |
+| `nvg init` | Create sample `.nvg` config |
+| `nvg install` | Install pre-commit hook |
+| `nvg install --commit-msg` | Install commit-msg hook |
+| `nvg uninstall` | Remove hooks |
+| `nvg run` | Review staged files |
+| `nvg run --ci` | Review last commit (CI/CD) |
+| `nvg run --pr-mode` | Review full PR changes |
+| `nvg run --no-cache` | Review ignoring cache |
+| `nvg config` | Show configuration |
+| `nvg cache status` | Show cache info |
+| `nvg version` | Show version |
 
 > 📖 See [docs/commands.md](docs/commands.md) for detailed usage.
 
@@ -136,7 +136,7 @@ gga install             # Install git hook
 
 | Topic | Description |
 |-------|------------|
-| [Configuration](docs/configuration.md) | `.gga` config file, options, hierarchy, env overrides |
+| [Configuration](docs/configuration.md) | `.nvg` config file, options, hierarchy, env overrides |
 | [Rules File](docs/rules-file.md) | Writing effective `AGENTS.md`, best practices, skill-based approach |
 | [Providers](docs/providers.md) | Detailed setup for each AI provider |
 | [Commands](docs/commands.md) | Full command reference with examples |

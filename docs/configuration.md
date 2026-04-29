@@ -2,11 +2,11 @@
 
 > 📖 Back to [README](../README.md)
 
-Complete reference for configuring Gentleman Guardian Angel.
+Complete reference for configuring NuevoViruz Guardian.
 
 ---
 
-## Config File: `.gga`
+## Config File: `.nvg`
 
 Create this file in your project root:
 
@@ -57,9 +57,9 @@ TIMEOUT="300"
 
 ## Config Hierarchy (Priority Order)
 
-1. **Environment variable** `GGA_PROVIDER`, `GGA_TIMEOUT` (highest priority)
-2. **Project config** `.gga` (in project root)
-3. **Global config** `~/.config/gga/config` (lowest priority)
+1. **Environment variable** `NVG_PROVIDER`, `NVG_TIMEOUT` (highest priority)
+2. **Project config** `.nvg` (in project root)
+3. **Global config** `~/.config/nvg/config` (lowest priority)
 
 ---
 
@@ -67,11 +67,11 @@ TIMEOUT="300"
 
 ```bash
 # Override provider for a single run
-GGA_PROVIDER="gemini" gga run
+NVG_PROVIDER="gemini" nvg run
 
 # Or export for the session
-export GGA_PROVIDER="ollama:llama3.2"
+export NVG_PROVIDER="ollama:llama3.2"
 
 # Override timeout for a single run
-GGA_TIMEOUT=600 gga run
+NVG_TIMEOUT=600 nvg run
 ```

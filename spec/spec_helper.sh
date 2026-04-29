@@ -52,9 +52,9 @@ create_and_stage_file() {
   git add "$filename"
 }
 
-# Create a minimal .gga config
+# Create a minimal .nvg config
 create_test_config() {
-  cat > .gga << 'EOF'
+  cat > .nvg << 'EOF'
 PROVIDER="mock"
 FILE_PATTERNS="*.ts,*.tsx,*.js"
 EXCLUDE_PATTERNS="*.test.ts"

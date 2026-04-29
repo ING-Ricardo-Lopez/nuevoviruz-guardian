@@ -1,7 +1,7 @@
-# Skill: gga-branch-pr
+# Skill: nvg-branch-pr
 
 ## Purpose
-Standardize branch creation and PR submission for the GGA project.
+Standardize branch creation and PR submission for the NVG project.
 
 ## When to Use
 When creating a pull request, opening a PR, or preparing changes for review.

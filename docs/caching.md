@@ -2,7 +2,7 @@
 
 > 📖 Back to [README](../README.md)
 
-GGA includes intelligent caching to speed up reviews by skipping files that haven't changed.
+NVG includes intelligent caching to speed up reviews by skipping files that haven't changed.
 
 ---
 
@@ -12,7 +12,7 @@ GGA includes intelligent caching to speed up reviews by skipping files that have
 ┌─────────────────────────────────────────────────────────────────┐
 │                        Cache Logic                               │
 ├─────────────────────────────────────────────────────────────────┤
-│  1. Hash AGENTS.md + .gga config                                │
+│  1. Hash AGENTS.md + .nvg config                                │
 │     └─► If changed → Invalidate ALL cache                       │
 │                                                                  │
 │  2. For each staged file:                                        │
@@ -35,7 +35,7 @@ The cache automatically invalidates when:
 | --------------------- | ----------------------------- |
 | File content changes  | Only that file is re-reviewed |
 | `AGENTS.md` changes   | **All files** are re-reviewed |
-| `.gga` config changes | **All files** are re-reviewed |
+| `.nvg` config changes | **All files** are re-reviewed |
 
 ---
 
@@ -43,21 +43,21 @@ The cache automatically invalidates when:
 
 ```bash
 # Check cache status
-$ gga cache status
+$ nvg cache status
 
 Cache Status:
 
-  Cache directory: ~/.cache/gga/a1b2c3d4...
+  Cache directory: ~/.cache/nvg/a1b2c3d4...
   Cache validity: Valid
   Cached files: 12
   Cache size: 4.0K
 
 # Clear project cache
-$ gga cache clear
+$ nvg cache clear
 ✅ Cleared cache for current project
 
 # Clear all cache (all projects)
-$ gga cache clear-all
+$ nvg cache clear-all
 ✅ Cleared all cache data
 ```
 
@@ -67,7 +67,7 @@ $ gga cache clear-all
 
 ```bash
 # Force review all files, ignoring cache
-gga run --no-cache
+nvg run --no-cache
 ```
 
 ---
@@ -75,9 +75,9 @@ gga run --no-cache
 ## Cache Location
 
 ```
-~/.cache/gga/
+~/.cache/nvg/
 ├── <project-hash-1>/
-│   ├── metadata          # Hash of AGENTS.md + .gga
+│   ├── metadata          # Hash of AGENTS.md + .nvg
 │   └── files/
 │       ├── <file-hash-a> # "PASSED"
 │       └── <file-hash-b> # "PASSED"

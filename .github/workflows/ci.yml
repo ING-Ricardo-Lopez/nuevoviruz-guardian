@@ -31,7 +31,7 @@ jobs:
           # -e SC1090,SC1091: ignore "can't follow non-constant source" (dynamic paths)
           # -e SC2162: ignore "read without -r" (we handle backslashes intentionally)
           # -e SC2129: ignore "use { } >> file" style suggestion
-          shellcheck -x -e SC1090,SC1091,SC2162,SC2129 bin/gga lib/*.sh
+          shellcheck -x -e SC1090,SC1091,SC2162,SC2129 bin/nvg lib/*.sh
 
   # ============================================================================
   # Unit Tests - Fast tests with mocks (no external dependencies)

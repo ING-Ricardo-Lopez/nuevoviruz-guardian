@@ -1,5 +1,5 @@
 # ============================================================================
-# CODEOWNERS - Gentleman Guardian Angel
+# CODEOWNERS - NuevoViruz Guardian
 # ============================================================================
 # This file defines who must approve pull requests before they can be merged.
 # All changes require approval from the repository owner.
@@ -12,5 +12,5 @@
 
 # Critical files - extra attention
 /.github/ @alanbuscaglia
-/bin/gga @alanbuscaglia
+/bin/nvg @alanbuscaglia
 /lib/ @alanbuscaglia

@@ -4,7 +4,7 @@ Describe 'check_update()'
   # Source the script variables and function directly
   setup() {
     VERSION="2.7.0"
-    UPDATE_CHECK_REPO="Gentleman-Programming/gentleman-guardian-angel"
+    UPDATE_CHECK_REPO="ING-Ricardo-Lopez/nuevoviruz-guardian"
     YELLOW='\033[1;33m'
     NC='\033[0m'
   }
@@ -12,7 +12,7 @@ Describe 'check_update()'
   BeforeEach 'setup'
 
   # Source check_update from the main script
-  Include "$PROJECT_ROOT/bin/gga"
+  Include "$PROJECT_ROOT/bin/nvg"
 
   Describe 'when a newer version is available'
     mock_curl() {
@@ -27,7 +27,7 @@ Describe 'check_update()'
       The output should include "Update available"
       The output should include "v1.0.0"
       The output should include "v2.8.0"
-      The output should include "brew update && brew upgrade gga"
+      The output should include "brew update && brew upgrade nvg"
     End
 
     It 'shows update notification for minor bump'

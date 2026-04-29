@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # ============================================================================
-# Gentleman Guardian Angel - Uninstaller
+# NuevoViruz Guardian - Uninstaller
 # ============================================================================
-# Removes the gga CLI tool from your system
+# Removes the nvg CLI tool from your system
 # ============================================================================
 
 set -e
@@ -24,19 +24,19 @@ detect_os() {
     *)                echo "linux" ;;
   esac
 }
-GGA_OS=$(detect_os)
+NVG_OS=$(detect_os)
 
 echo ""
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${CYAN}${BOLD}  Gentleman Guardian Angel - Uninstaller${NC}"
+echo -e "${CYAN}${BOLD}  NuevoViruz Guardian - Uninstaller${NC}"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 
 # Find and remove binary
 LOCATIONS=(
-  "/usr/local/bin/gga"
-  "$HOME/.local/bin/gga"
-  "$HOME/bin/gga"
+  "/usr/local/bin/nvg"
+  "$HOME/.local/bin/nvg"
+  "$HOME/bin/nvg"
 )
 
 FOUND=false
@@ -49,7 +49,7 @@ for loc in "${LOCATIONS[@]}"; do
 done
 
 # Check both possible lib locations
-for lib_dir in "$HOME/.local/share/gga" "$HOME/bin/lib/gga"; do
+for lib_dir in "$HOME/.local/share/nvg" "$HOME/bin/lib/nvg"; do
   if [[ -d "$lib_dir" ]]; then
     rm -rf "$lib_dir"
     echo -e "${GREEN}✅ Removed: $lib_dir${NC}"
@@ -58,7 +58,7 @@ for lib_dir in "$HOME/.local/share/gga" "$HOME/bin/lib/gga"; do
 done
 
 # Remove global config (optional)
-GLOBAL_CONFIG="$HOME/.config/gga"
+GLOBAL_CONFIG="$HOME/.config/nvg"
 if [[ -d "$GLOBAL_CONFIG" ]]; then
   echo ""
   read -p "Remove global config ($GLOBAL_CONFIG)? (y/N): " confirm
@@ -71,10 +71,10 @@ if [[ -d "$GLOBAL_CONFIG" ]]; then
 fi
 
 if [[ "$FOUND" == false ]]; then
-  echo -e "${YELLOW}⚠️  gga was not found on this system${NC}"
+  echo -e "${YELLOW}⚠️  nvg was not found on this system${NC}"
 fi
 
 echo ""
-echo -e "${BOLD}Note:${NC} Project-specific configs (.gga) and git hooks"
+echo -e "${BOLD}Note:${NC} Project-specific configs (.nvg) and git hooks"
 echo "      were not removed. Remove them manually if needed."
 echo ""

@@ -7,8 +7,8 @@
 # ============================================================================
 
 Describe 'PR Mode'
-  # We test the functions from bin/gga by sourcing them
-  # Since bin/gga has a main() that runs immediately, we need to
+  # We test the functions from bin/nvg by sourcing them
+  # Since bin/nvg has a main() that runs immediately, we need to
   # extract the testable functions into lib/ or test indirectly.
   # For now, we test the helper functions that will be in lib/pr_mode.sh
 
@@ -150,7 +150,7 @@ Describe 'PR Mode'
       }
 
       # Skip file existence check in unit tests
-      GGA_SKIP_FILE_CHECK=true
+      NVG_SKIP_FILE_CHECK=true
       When call get_pr_files "main...HEAD" "*" ""
       The output should include "src/app.ts"
       The output should include "src/utils.ts"
@@ -169,7 +169,7 @@ Describe 'PR Mode'
         esac
       }
 
-      GGA_SKIP_FILE_CHECK=true
+      NVG_SKIP_FILE_CHECK=true
       When call get_pr_files "main...HEAD" "*.ts" ""
       The output should include "src/app.ts"
       The output should include "src/utils.ts"
@@ -188,7 +188,7 @@ Describe 'PR Mode'
         esac
       }
 
-      GGA_SKIP_FILE_CHECK=true
+      NVG_SKIP_FILE_CHECK=true
       When call get_pr_files "main...HEAD" "*.ts" "*.test.ts,*.spec.ts"
       The output should include "src/app.ts"
       The output should not include "src/app.test.ts"
@@ -205,7 +205,7 @@ Describe 'PR Mode'
         esac
       }
 
-      GGA_SKIP_FILE_CHECK=true
+      NVG_SKIP_FILE_CHECK=true
       When call get_pr_files "main...HEAD" "*.ts" ""
       The output should eq ""
     End
@@ -221,7 +221,7 @@ Describe 'PR Mode'
         esac
       }
 
-      GGA_SKIP_FILE_CHECK=true
+      NVG_SKIP_FILE_CHECK=true
       When call get_pr_files "main...HEAD" "*" ""
       The output should include "src/app.ts"
       The output should include "README.md"

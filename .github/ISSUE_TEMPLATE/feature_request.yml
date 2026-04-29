@@ -1,5 +1,5 @@
 name: Feature Request
-description: Suggest a new feature or improvement for GGA
+description: Suggest a new feature or improvement for NVG
 labels: ["enhancement", "status:needs-review"]
 
 body:
@@ -8,7 +8,7 @@ body:
       value: |
         ## Before Opening a Feature Request
 
-        Please read [CONTRIBUTING.md](https://github.com/Gentleman-Programming/gentleman-guardian-angel/blob/main/CONTRIBUTING.md) to understand the issue-first workflow.
+        Please read [CONTRIBUTING.md](https://github.com/ING-Ricardo-Lopez/nuevoviruz-guardian/blob/main/CONTRIBUTING.md) to understand the issue-first workflow.
 
   - type: checkboxes
     id: preflight
@@ -27,7 +27,7 @@ body:
     attributes:
       label: Problem Description
       description: What problem does this feature solve? What is the current limitation?
-      placeholder: "Currently, GGA doesn't support... This makes it hard to..."
+      placeholder: "Currently, NVG doesn't support... This makes it hard to..."
     validations:
       required: true
 
@@ -39,10 +39,10 @@ body:
       placeholder: |
         ```bash
         # Example of the proposed feature
-        gga run --new-flag value
+        nvg run --new-flag value
 
         # Or new command
-        gga new-command [options]
+        nvg new-command [options]
         ```
     validations:
       required: true
@@ -51,14 +51,14 @@ body:
     id: affected_area
     attributes:
       label: Affected Area
-      description: Which part of GGA does this feature relate to?
+      description: Which part of NVG does this feature relate to?
       options:
         - CLI (commands, flags)
         - Hooks (install, uninstall, markers)
         - Providers (Claude, Gemini, Codex, Ollama)
         - Cache System
         - CI Mode
-        - Configuration (.gga file)
+        - Configuration (.nvg file)
         - Documentation
         - Other
     validations:

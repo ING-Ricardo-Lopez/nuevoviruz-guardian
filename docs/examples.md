@@ -2,7 +2,7 @@
 
 > 📖 Back to [README](../README.md)
 
-Real-world walkthrough and project configuration examples for Gentleman Guardian Angel.
+Real-world walkthrough and project configuration examples for NuevoViruz Guardian.
 
 ---
 
@@ -13,10 +13,10 @@ git commit -m "feat: add feature"
     │
     ▼
 ┌───────────────────────────────────────┐
-│  Pre-commit Hook (gga run) │
+│  Pre-commit Hook (nvg run) │
 └───────────────────────────────────────┘
     │
-    ├──▶ 1. Load config from .gga
+    ├──▶ 1. Load config from .nvg
     │
     ├──▶ 2. Validate provider is installed
     │
@@ -51,25 +51,25 @@ Let's walk through a complete example from setup to commit:
 ```bash
 $ cd ~/projects/my-react-app
 
-$ gga init
+$ nvg init
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Gentleman Guardian Angel v2.8.0
+  NuevoViruz Guardian v2.8.0
   Provider-agnostic code review using AI
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-✅ Created config file: .gga
+✅ Created config file: .nvg
 
 ℹ️  Next steps:
-  1. Edit .gga to set your preferred provider
+  1. Edit .nvg to set your preferred provider
   2. Create AGENTS.md with your coding standards
-  3. Run: gga install
+  3. Run: nvg install
 ```
 
 ### Step 2: Configure your provider
 
 ```bash
-$ cat .gga
+$ cat .nvg
 
 # AI Provider (required)
 PROVIDER="claude"
@@ -113,10 +113,10 @@ EOF
 ### Step 4: Install the git hook
 
 ```bash
-$ gga install
+$ nvg install
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Gentleman Guardian Angel v2.8.0
+  NuevoViruz Guardian v2.8.0
   Provider-agnostic code review using AI
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -130,7 +130,7 @@ $ git add src/components/Button.tsx
 $ git commit -m "feat: add new button component"
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Gentleman Guardian Angel v2.8.0
+  NuevoViruz Guardian v2.8.0
   Provider-agnostic code review using AI
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
@@ -172,7 +172,7 @@ $ git add src/components/Button.tsx
 $ git commit -m "feat: add new button component"
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-  Gentleman Guardian Angel v2.8.0
+  NuevoViruz Guardian v2.8.0
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 ℹ️  Provider: claude
@@ -201,7 +201,7 @@ All files comply with the coding standards defined in AGENTS.md.
 ### TypeScript/React Project
 
 ```bash
-# .gga
+# .nvg
 PROVIDER="claude"
 FILE_PATTERNS="*.ts,*.tsx"
 EXCLUDE_PATTERNS="*.test.ts,*.test.tsx,*.spec.ts,*.d.ts,*.stories.tsx"
@@ -211,7 +211,7 @@ RULES_FILE="AGENTS.md"
 ### Python Project
 
 ```bash
-# .gga
+# .nvg
 PROVIDER="lmstudio:codellama"
 FILE_PATTERNS="*.py"
 EXCLUDE_PATTERNS="*_test.py,test_*.py,conftest.py,__pycache__/*"
@@ -221,7 +221,7 @@ RULES_FILE=".coding-standards.md"
 ### Go Project
 
 ```bash
-# .gga
+# .nvg
 PROVIDER="gemini"
 FILE_PATTERNS="*.go"
 EXCLUDE_PATTERNS="*_test.go,mock_*.go,*_mock.go"
@@ -230,7 +230,7 @@ EXCLUDE_PATTERNS="*_test.go,mock_*.go,*_mock.go"
 ### Full-Stack Monorepo
 
 ```bash
-# .gga
+# .nvg
 PROVIDER="claude"
 FILE_PATTERNS="*.ts,*.tsx,*.py,*.go"
 EXCLUDE_PATTERNS="*.test.*,*_test.*,*.mock.*,*.d.ts,dist/*,build/*"

@@ -1,7 +1,7 @@
-# Skill: gga-shellcheck-standards
+# Skill: nvg-shellcheck-standards
 
 ## Purpose
-Maintain shell script quality and portability across all GGA bash scripts.
+Maintain shell script quality and portability across all NVG bash scripts.
 
 ## When to Use
 When writing or modifying bash scripts in `bin/` or `lib/`.
@@ -13,18 +13,18 @@ When writing or modifying bash scripts in `bin/` or `lib/`.
 make lint
 
 # Direct (matches CI configuration)
-shellcheck -x -e SC1090,SC1091,SC2162,SC2129 bin/gga lib/*.sh
+shellcheck -x -e SC1090,SC1091,SC2162,SC2129 bin/nvg lib/*.sh
 ```
 
 All new code must pass `make lint` before pushing.
 
 ## Accepted Exclusions
 
-| Code | Rule | Why GGA Excludes It |
+| Code | Rule | Why NVG Excludes It |
 |------|------|---------------------|
-| SC1090 | Can't follow non-constant source | GGA uses dynamic paths for lib loading |
+| SC1090 | Can't follow non-constant source | NVG uses dynamic paths for lib loading |
 | SC1091 | Not following sourced file | Same — dynamic lib sourcing |
-| SC2162 | read without -r | GGA intentionally handles backslash input |
+| SC2162 | read without -r | NVG intentionally handles backslash input |
 | SC2129 | Use { } >> file | Style preference — individual redirects are clearer here |
 
 Do NOT add new exclusions without justification in a PR comment.
@@ -81,7 +81,7 @@ eval "$user_input"
 sed -i '' 's/foo/bar/' file        # macOS
 sed -i 's/foo/bar/' file           # Linux
 
-# GGA pattern — detect and branch:
+# NVG pattern — detect and branch:
 if [[ "$OSTYPE" == "darwin"* ]]; then
   sed -i '' 's/foo/bar/' "$file"
 else

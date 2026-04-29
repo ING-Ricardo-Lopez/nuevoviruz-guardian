@@ -2,7 +2,7 @@
 
 > 📖 Back to [README](../README.md)
 
-Common issues and fixes for Gentleman Guardian Angel.
+Common issues and fixes for NuevoViruz Guardian.
 
 ---
 
@@ -69,8 +69,8 @@ brew install gh
 # 2. Authenticate
 gh auth login
 
-# 3. Configure GGA
-echo 'PROVIDER="github:gpt-4o"' > .gga
+# 3. Configure NVG
+echo 'PROVIDER="github:gpt-4o"' > .nvg
 
 # Available models: https://github.com/marketplace/models
 ```
@@ -83,8 +83,8 @@ If reviews are timing out (exit code 124):
 
 ```bash
 # Increase timeout (default: 300s)
-TIMEOUT="600"          # In .gga config
-GGA_TIMEOUT=600 gga run  # Or via environment variable
+TIMEOUT="600"          # In .nvg config
+NVG_TIMEOUT=600 nvg run  # Or via environment variable
 
 # Review fewer files at once
 EXCLUDE_PATTERNS="*.min.js,*.bundle.js,dist/*"
@@ -92,19 +92,19 @@ EXCLUDE_PATTERNS="*.min.js,*.bundle.js,dist/*"
 
 ---
 
-## GGA not running from VS Code Source Control panel
+## NVG not running from VS Code Source Control panel
 
-If GGA doesn't trigger when committing from VS Code's Source Control UI:
+If NVG doesn't trigger when committing from VS Code's Source Control UI:
 
 1. Ensure the hook is installed: `ls -la .git/hooks/pre-commit`
-2. Check that `gga` is in your PATH — VS Code may use a different shell profile
-   - On Windows, check both PowerShell (`where gga`) and Git Bash (`which gga`) inside VS Code.
+2. Check that `nvg` is in your PATH — VS Code may use a different shell profile
+   - On Windows, check both PowerShell (`where nvg`) and Git Bash (`which nvg`) inside VS Code.
 3. Try adding the full path in the hook:
    ```bash
    # .git/hooks/pre-commit
-   /opt/homebrew/bin/gga run || exit 1
+   /opt/homebrew/bin/nvg run || exit 1
    ```
-4. On Windows, if PATH still differs, hardcode the executable path in the hook (for example `C:/Users/<you>/.local/bin/gga.exe run || exit 1`).
+4. On Windows, if PATH still differs, hardcode the executable path in the hook (for example `C:/Users/<you>/.local/bin/nvg.exe run || exit 1`).
 5. Check the Git output channel (View → Output → Git) for error messages
 
 ---

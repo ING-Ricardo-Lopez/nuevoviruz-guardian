@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # ============================================================================
-# Gentleman Guardian Angel - Installer
+# NuevoViruz Guardian - Installer
 # ============================================================================
-# Installs the gga CLI tool to your system
+# Installs the nvg CLI tool to your system
 # ============================================================================
 
 set -e
@@ -25,18 +25,18 @@ detect_os() {
     *)                echo "linux" ;;
   esac
 }
-GGA_OS=$(detect_os)
+NVG_OS=$(detect_os)
 
 echo ""
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-echo -e "${CYAN}${BOLD}  Gentleman Guardian Angel - Installer${NC}"
+echo -e "${CYAN}${BOLD}  NuevoViruz Guardian - Installer${NC}"
 echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
 echo ""
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 # Determine install location
-if [[ "$GGA_OS" == "windows" ]]; then
+if [[ "$NVG_OS" == "windows" ]]; then
     INSTALL_DIR="$HOME/bin"
     mkdir -p "$INSTALL_DIR"
 elif [[ -w "/usr/local/bin" ]]; then
@@ -59,29 +59,29 @@ if [[ ! -w "$INSTALL_DIR" ]]; then
 fi
 
 # Check if already installed
-if [[ -f "$INSTALL_DIR/gga" ]]; then
+if [[ -f "$INSTALL_DIR/nvg" ]]; then
     if [[ -t 0 ]]; then
-        echo -e "${YELLOW}⚠️  gga is already installed${NC}"
+        echo -e "${YELLOW}⚠️  nvg is already installed${NC}"
         read -p "Reinstall? (y/N): " confirm
         if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
             echo "Aborted."
             exit 0
         fi
     else
-        echo -e "${YELLOW}⚠️  gga is already installed, reinstalling...${NC}"
+        echo -e "${YELLOW}⚠️  nvg is already installed, reinstalling...${NC}"
     fi
 fi
 
 # Create lib directory
-if [[ "$GGA_OS" == "windows" ]]; then
-    LIB_INSTALL_DIR="$HOME/bin/lib/gga"
+if [[ "$NVG_OS" == "windows" ]]; then
+    LIB_INSTALL_DIR="$HOME/bin/lib/nvg"
 else
-    LIB_INSTALL_DIR="$HOME/.local/share/gga/lib"
+    LIB_INSTALL_DIR="$HOME/.local/share/nvg/lib"
 fi
 mkdir -p "$LIB_INSTALL_DIR"
 
 # Copy files
-cp "$SCRIPT_DIR/bin/gga" "$INSTALL_DIR/gga"
+cp "$SCRIPT_DIR/bin/nvg" "$INSTALL_DIR/nvg"
 cp "$SCRIPT_DIR/lib/providers.sh" "$LIB_INSTALL_DIR/providers.sh"
 cp "$SCRIPT_DIR/lib/cache.sh" "$LIB_INSTALL_DIR/cache.sh"
 cp "$SCRIPT_DIR/lib/pr_mode.sh" "$LIB_INSTALL_DIR/pr_mode.sh"
@@ -90,33 +90,33 @@ cp "$SCRIPT_DIR/lib/pr_mode.sh" "$LIB_INSTALL_DIR/pr_mode.sh"
 GIT_VERSION=$(cd "$SCRIPT_DIR" && git describe --tags --abbrev=0 2>/dev/null || true)
 GIT_VERSION="${GIT_VERSION#v}"  # Strip leading 'v'
 if [[ -n "$GIT_VERSION" ]]; then
-  if [[ "$GGA_OS" == "macos" ]]; then
-    sed -i '' "s|VERSION=\"\${GGA_VERSION:-dev}\"|VERSION=\"$GIT_VERSION\"|" "$INSTALL_DIR/gga"
+  if [[ "$NVG_OS" == "macos" ]]; then
+    sed -i '' "s|VERSION=\"\${NVG_VERSION:-dev}\"|VERSION=\"$GIT_VERSION\"|" "$INSTALL_DIR/nvg"
   else
-    sed -i "s|VERSION=\"\${GGA_VERSION:-dev}\"|VERSION=\"$GIT_VERSION\"|" "$INSTALL_DIR/gga"
+    sed -i "s|VERSION=\"\${NVG_VERSION:-dev}\"|VERSION=\"$GIT_VERSION\"|" "$INSTALL_DIR/nvg"
   fi
 fi
 
 # Update LIB_DIR path in installed script
-if [[ "$GGA_OS" == "macos" ]]; then
-  sed -i '' "s|LIB_DIR=.*|LIB_DIR=\"$LIB_INSTALL_DIR\"|" "$INSTALL_DIR/gga"
+if [[ "$NVG_OS" == "macos" ]]; then
+  sed -i '' "s|LIB_DIR=.*|LIB_DIR=\"$LIB_INSTALL_DIR\"|" "$INSTALL_DIR/nvg"
 else
-  sed -i "s|LIB_DIR=.*|LIB_DIR=\"$LIB_INSTALL_DIR\"|" "$INSTALL_DIR/gga"
+  sed -i "s|LIB_DIR=.*|LIB_DIR=\"$LIB_INSTALL_DIR\"|" "$INSTALL_DIR/nvg"
 fi
 
 # Make executable
-chmod +x "$INSTALL_DIR/gga"
+chmod +x "$INSTALL_DIR/nvg"
 chmod +x "$LIB_INSTALL_DIR/providers.sh"
 chmod +x "$LIB_INSTALL_DIR/cache.sh"
 
-echo -e "${GREEN}✅ Installed gga to $INSTALL_DIR${NC}"
+echo -e "${GREEN}✅ Installed nvg to $INSTALL_DIR${NC}"
 echo ""
 
 # Check if install dir is in PATH
 if [[ ":$PATH:" != *":$INSTALL_DIR:"* ]]; then
   echo -e "${YELLOW}⚠️  $INSTALL_DIR is not in your PATH${NC}"
   echo ""
-  if [[ "$GGA_OS" == "windows" ]]; then
+  if [[ "$NVG_OS" == "windows" ]]; then
     echo "Add this line to your ~/.bashrc:"
     echo ""
     echo -e "  ${CYAN}export PATH=\"\$HOME/bin:\$PATH\"${NC}"
@@ -134,12 +134,12 @@ echo "  1. Navigate to your project:"
 echo "     cd /path/to/your/project"
 echo ""
 echo "  2. Initialize config:"
-echo "     gga init"
+echo "     nvg init"
 echo ""
 echo "  3. Create your AGENTS.md with coding standards"
 echo ""
 echo "  4. Install the git hook:"
-echo "     gga install"
+echo "     nvg install"
 echo ""
 echo "  5. You're ready! The hook will run on each commit."
 echo ""

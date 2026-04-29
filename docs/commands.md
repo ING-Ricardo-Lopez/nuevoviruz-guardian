@@ -2,7 +2,7 @@
 
 > 📖 Back to [README](../README.md)
 
-Full command reference for Gentleman Guardian Angel.
+Full command reference for NuevoViruz Guardian.
 
 ---
 
@@ -10,99 +10,99 @@ Full command reference for Gentleman Guardian Angel.
 
 | Command                     | Description                                               | Example                         |
 | --------------------------- | --------------------------------------------------------- | ------------------------------- |
-| `init`                      | Create sample `.gga` config file                          | `gga init`                      |
-| `install`                   | Install git pre-commit hook (default)                     | `gga install`                   |
-| `install --commit-msg`      | Install git commit-msg hook (for commit message validation) | `gga install --commit-msg`    |
-| `uninstall`                 | Remove git hooks from current repo                        | `gga uninstall`                 |
-| `run`                       | Run code review on staged files                           | `gga run`                       |
-| `run --ci`                  | Run code review on last commit (for CI/CD)                | `gga run --ci`                  |
-| `run --pr-mode`             | Review all files changed in the full PR                   | `gga run --pr-mode`             |
-| `run --pr-mode --diff-only` | PR review with diffs only (faster, cheaper)               | `gga run --pr-mode --diff-only` |
-| `run --no-cache`            | Run review ignoring cache                                 | `gga run --no-cache`            |
-| `config`                    | Display current configuration and status                  | `gga config`                    |
-| `cache status`              | Show cache status for current project                     | `gga cache status`              |
-| `cache clear`               | Clear cache for current project                           | `gga cache clear`               |
-| `cache clear-all`           | Clear all cached data                                     | `gga cache clear-all`           |
-| `help`                      | Show help message with all commands                       | `gga help`                      |
-| `version`                   | Show installed version                                    | `gga version`                   |
+| `init`                      | Create sample `.nvg` config file                          | `nvg init`                      |
+| `install`                   | Install git pre-commit hook (default)                     | `nvg install`                   |
+| `install --commit-msg`      | Install git commit-msg hook (for commit message validation) | `nvg install --commit-msg`    |
+| `uninstall`                 | Remove git hooks from current repo                        | `nvg uninstall`                 |
+| `run`                       | Run code review on staged files                           | `nvg run`                       |
+| `run --ci`                  | Run code review on last commit (for CI/CD)                | `nvg run --ci`                  |
+| `run --pr-mode`             | Review all files changed in the full PR                   | `nvg run --pr-mode`             |
+| `run --pr-mode --diff-only` | PR review with diffs only (faster, cheaper)               | `nvg run --pr-mode --diff-only` |
+| `run --no-cache`            | Run review ignoring cache                                 | `nvg run --no-cache`            |
+| `config`                    | Display current configuration and status                  | `nvg config`                    |
+| `cache status`              | Show cache status for current project                     | `nvg cache status`              |
+| `cache clear`               | Clear cache for current project                           | `nvg cache clear`               |
+| `cache clear-all`           | Clear all cached data                                     | `nvg cache clear-all`           |
+| `help`                      | Show help message with all commands                       | `nvg help`                      |
+| `version`                   | Show installed version                                    | `nvg version`                   |
 
 ---
 
 ## Command Details
 
-### `gga init`
+### `nvg init`
 
-Creates a sample `.gga` configuration file in your project root with sensible defaults.
+Creates a sample `.nvg` configuration file in your project root with sensible defaults.
 
 ```bash
-$ gga init
-✅ Created config file: .gga
+$ nvg init
+✅ Created config file: .nvg
 ```
 
 ---
 
-### `gga install`
+### `nvg install`
 
 Installs a git hook that automatically runs code review on every commit.
 
 **Default (pre-commit hook):**
 
 ```bash
-$ gga install
+$ nvg install
 ✅ Installed pre-commit hook: .git/hooks/pre-commit
 ```
 
 **With commit message validation (commit-msg hook):**
 
 ```bash
-$ gga install --commit-msg
+$ nvg install --commit-msg
 ✅ Installed commit-msg hook: .git/hooks/commit-msg
 ```
 
-The `--commit-msg` flag installs a commit-msg hook instead of pre-commit. This allows GGA to also validate your commit message (e.g., conventional commits format, issue references, etc.). The commit message is automatically included in the AI review.
+The `--commit-msg` flag installs a commit-msg hook instead of pre-commit. This allows NVG to also validate your commit message (e.g., conventional commits format, issue references, etc.). The commit message is automatically included in the AI review.
 
-If a hook already exists, GGA will append to it rather than replacing it.
+If a hook already exists, NVG will append to it rather than replacing it.
 
 ---
 
-### `gga uninstall`
+### `nvg uninstall`
 
 Removes the git pre-commit hook from your repository.
 
 ```bash
-$ gga uninstall
+$ nvg uninstall
 ✅ Removed pre-commit hook
 ```
 
 ---
 
-### `gga run [--no-cache]`
+### `nvg run [--no-cache]`
 
 Runs code review on currently staged files. Uses intelligent caching by default to skip unchanged files.
 
 ```bash
 $ git add src/components/Button.tsx
-$ gga run
+$ nvg run
 # Reviews the staged file (uses cache)
 
-$ gga run --no-cache
+$ nvg run --no-cache
 # Forces review of all files, ignoring cache
 ```
 
 ---
 
-### `gga config`
+### `nvg config`
 
 Shows the current configuration, including where config files are loaded from and all settings.
 
 ```bash
-$ gga config
+$ nvg config
 
 Current Configuration:
 
 Config Files:
   Global:  Not found
-  Project: .gga
+  Project: .nvg
 
 Values:
   PROVIDER:          claude

@@ -12,7 +12,7 @@ DOCKER_COMPOSE = docker compose
 # Help
 # ============================================================================
 help:
-	@echo "Gentleman Guardian Angel - Development Commands"
+	@echo "NuevoViruz Guardian - Development Commands"
 	@echo ""
 	@echo "Usage: make [target]"
 	@echo ""
@@ -23,7 +23,7 @@ help:
 	@echo "  test-coverage    Run tests with coverage report"
 	@echo "  lint             Run shellcheck linter"
 	@echo "  clean            Clean cache and temp files"
-	@echo "  install          Install gga locally"
+	@echo "  install          Install nvg locally"
 	@echo ""
 	@echo "Docker Development (Recommended):"
 	@echo "  docker-build     Build test Docker image"
@@ -67,19 +67,19 @@ test-coverage:
 # Lint shell scripts
 lint:
 	@echo "Linting shell scripts..."
-	shellcheck bin/gga lib/*.sh
+	shellcheck bin/nvg lib/*.sh
 	@echo "✅ Linting passed"
 
 # Clean temp files and cache
 clean:
 	@echo "Cleaning..."
 	rm -rf coverage/
-	rm -rf ~/.cache/gga/
+	rm -rf ~/.cache/nvg/
 	@echo "✅ Cleaned"
 
 # Install locally
 install:
-	@echo "Installing gga locally..."
+	@echo "Installing nvg locally..."
 	./install.sh
 
 # Quick check before commit

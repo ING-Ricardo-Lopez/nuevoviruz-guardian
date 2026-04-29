@@ -1,7 +1,7 @@
 # shellcheck shell=bash
 
 Describe 'Staged files reading behavior'
-  # This tests that GGA reads from the staging area (index), not the working directory
+  # This tests that NVG reads from the staging area (index), not the working directory
   # This is critical to prevent index corruption and ensure we review what will be committed
 
   setup() {
@@ -10,10 +10,10 @@ Describe 'Staged files reading behavior'
     git init --quiet
     git config user.email "test@test.com"
     git config user.name "Test User"
-    GGA_BIN="$PROJECT_ROOT/bin/gga"
+    NVG_BIN="$PROJECT_ROOT/bin/nvg"
     
     # Create minimal config
-    cat > .gga << 'EOF'
+    cat > .nvg << 'EOF'
 PROVIDER="claude"
 FILE_PATTERNS="*.ts"
 RULES_FILE="AGENTS.md"
@@ -51,7 +51,7 @@ EOF
   End
 
   Describe 'Race condition scenarios (Issue #15)'
-    # These tests verify that GGA handles scenarios where the working directory
+    # These tests verify that NVG handles scenarios where the working directory
     # changes AFTER staging but BEFORE commit - a common source of index corruption
 
     It 'handles file modified after staging (partial stage scenario)'
@@ -64,7 +64,7 @@ EOF
       # User continues editing after staging
       echo "function invalid() { return BAD_CODE; }" > app.ts
       
-      # GGA should review the STAGED version (valid), not the working dir version (invalid)
+      # NVG should review the STAGED version (valid), not the working dir version (invalid)
       staged=$(git show :app.ts)
       
       The value "$staged" should include "valid"
@@ -123,7 +123,7 @@ EOF
 
     It 'handles concurrent file modifications (simulated race)'
       # Simulate what happens when another tool (like lint-staged) modifies files
-      # while GGA is trying to read them
+      # while NVG is trying to read them
       
       echo "const original = 'before_lint';" > linted.ts
       git add linted.ts

@@ -1,10 +1,10 @@
-# Skill: gga-testing-coverage
+# Skill: nvg-testing-coverage
 
 ## Purpose
-Ensure test coverage for all behavior changes in GGA.
+Ensure test coverage for all behavior changes in NVG.
 
 ## When to Use
-When implementing behavior changes in any script (`bin/gga`, `lib/*.sh`).
+When implementing behavior changes in any script (`bin/nvg`, `lib/*.sh`).
 
 ## Framework
 ShellSpec — https://shellspec.info/
@@ -23,7 +23,7 @@ spec/
 ```
 
 **Unit tests** → test functions in `lib/cache.sh`, `lib/providers.sh` in isolation.
-**Integration tests** → test `gga` CLI commands, hook injection, CI mode end-to-end.
+**Integration tests** → test `nvg` CLI commands, hook injection, CI mode end-to-end.
 
 ## Running Tests
 

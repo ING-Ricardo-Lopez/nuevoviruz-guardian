@@ -19,19 +19,19 @@ Describe 'install.sh'
     It 'copies providers.sh to lib directory'
       HOME="$TEMP_DIR" INSTALL_DIR="$FAKE_INSTALL_DIR" \
         bash -c 'echo "y" | bash "$1/install.sh"' _ "$PROJECT_ROOT" 2>/dev/null
-      The path "$TEMP_DIR/.local/share/gga/lib/providers.sh" should be file
+      The path "$TEMP_DIR/.local/share/nvg/lib/providers.sh" should be file
     End
 
     It 'copies cache.sh to lib directory'
       HOME="$TEMP_DIR" INSTALL_DIR="$FAKE_INSTALL_DIR" \
         bash -c 'echo "y" | bash "$1/install.sh"' _ "$PROJECT_ROOT" 2>/dev/null
-      The path "$TEMP_DIR/.local/share/gga/lib/cache.sh" should be file
+      The path "$TEMP_DIR/.local/share/nvg/lib/cache.sh" should be file
     End
 
     It 'copies pr_mode.sh to lib directory'
       HOME="$TEMP_DIR" INSTALL_DIR="$FAKE_INSTALL_DIR" \
         bash -c 'echo "y" | bash "$1/install.sh"' _ "$PROJECT_ROOT" 2>/dev/null
-      The path "$TEMP_DIR/.local/share/gga/lib/pr_mode.sh" should be file
+      The path "$TEMP_DIR/.local/share/nvg/lib/pr_mode.sh" should be file
     End
   End
 End

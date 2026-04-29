@@ -112,8 +112,8 @@ brew install gh
 # 2. Authenticate
 gh auth login
 
-# 3. Configure GGA
-echo 'PROVIDER="github:gpt-4o"' > .gga
+# 3. Configure NVG
+echo 'PROVIDER="github:gpt-4o"' > .nvg
 
 # Available models: https://github.com/marketplace/models
 ```
@@ -131,7 +131,7 @@ ollama pull llama3.2
 ollama pull codellama
 ollama pull qwen2.5-coder
 
-# Configure GGA
+# Configure NVG
 PROVIDER="ollama:llama3.2"
 
 # Custom host (if not localhost:11434)
@@ -149,7 +149,7 @@ Run models locally via LM Studio's OpenAI-compatible API.
 # 1. Download and open LM Studio: https://lmstudio.ai
 # 2. Download a model in LM Studio
 # 3. Start the local server (Local Server tab)
-# 4. Configure GGA
+# 4. Configure NVG
 PROVIDER="lmstudio"                              # uses loaded model
 PROVIDER="lmstudio:llama-3.2-3b-instruct"       # specific model
 

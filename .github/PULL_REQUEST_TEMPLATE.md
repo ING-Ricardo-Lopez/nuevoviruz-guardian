@@ -32,7 +32,7 @@ Closes #<!-- issue number here -->
 
 | File | Change |
 |------|--------|
-| `bin/gga` | |
+| `bin/nvg` | |
 | `lib/` | |
 | `spec/` | |
 
@@ -55,7 +55,7 @@ The following checks run automatically on every PR:
 | Check Issue Reference | PR body contains `Closes/Fixes/Resolves #N` |
 | Check Issue Has `status:approved` | Linked issue was approved by a maintainer |
 | Check PR Has `type:*` Label | PR has exactly one `type:*` label |
-| Lint | ShellCheck passes on `bin/gga` and `lib/*.sh` |
+| Lint | ShellCheck passes on `bin/nvg` and `lib/*.sh` |
 | Unit Tests | `shellspec spec/unit` passes |
 | Integration Tests | `shellspec spec/integration/commands_spec.sh` passes |
 

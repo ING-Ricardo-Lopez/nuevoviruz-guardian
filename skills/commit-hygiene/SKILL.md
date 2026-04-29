@@ -1,7 +1,7 @@
-# Skill: gga-commit-hygiene
+# Skill: nvg-commit-hygiene
 
 ## Purpose
-Enforce conventional commits and a clean, readable history for GGA.
+Enforce conventional commits and a clean, readable history for NVG.
 
 ## When to Use
 Any commit creation, review, or branch cleanup.
@@ -32,16 +32,16 @@ Validated by regex:
 | build | Build system, Makefile changes |
 | revert | Reverting a previous commit |
 
-## Valid Scopes for GGA
+## Valid Scopes for NVG
 
 | Scope | Covers |
 |-------|--------|
 | providers | `lib/providers.sh`, any AI provider integration |
 | hooks | Hook system, marker injection, pre-commit logic |
 | cache | `lib/cache.sh`, hash logic |
-| cli | `bin/gga` flags, argument parsing, output |
+| cli | `bin/nvg` flags, argument parsing, output |
 | ci | GitHub Actions workflows |
-| config | `.gga` config file parsing |
+| config | `.nvg` config file parsing |
 | install | `install.sh`, `uninstall.sh` |
 
 ## Critical Rules

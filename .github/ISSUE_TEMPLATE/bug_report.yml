@@ -1,5 +1,5 @@
 name: Bug Report
-description: Report a bug in GGA
+description: Report a bug in NVG
 labels: ["bug", "status:needs-review"]
 
 body:
@@ -8,7 +8,7 @@ body:
       value: |
         ## Before Opening a Bug Report
 
-        Please read [CONTRIBUTING.md](https://github.com/Gentleman-Programming/gentleman-guardian-angel/blob/main/CONTRIBUTING.md) to understand the issue-first workflow.
+        Please read [CONTRIBUTING.md](https://github.com/ING-Ricardo-Lopez/nuevoviruz-guardian/blob/main/CONTRIBUTING.md) to understand the issue-first workflow.
 
   - type: checkboxes
     id: preflight
@@ -27,7 +27,7 @@ body:
     attributes:
       label: Bug Description
       description: A clear and concise description of what the bug is.
-      placeholder: "When I run `gga run`, it..."
+      placeholder: "When I run `nvg run`, it..."
     validations:
       required: true
 
@@ -37,7 +37,7 @@ body:
       label: Steps to Reproduce
       description: Exact steps to reproduce the behavior.
       placeholder: |
-        1. Run `gga install` in a repo
+        1. Run `nvg install` in a repo
         2. Stage a file with `git add file.sh`
         3. Run `git commit -m "test"`
         4. See error: ...
@@ -49,7 +49,7 @@ body:
     attributes:
       label: Expected Behavior
       description: What you expected to happen.
-      placeholder: GGA should...
+      placeholder: NVG should...
     validations:
       required: true
 
@@ -84,10 +84,10 @@ body:
       required: true
 
   - type: input
-    id: gga_version
+    id: nvg_version
     attributes:
-      label: GGA Version
-      description: Run `gga version` and paste the output here.
+      label: NVG Version
+      description: Run `nvg version` and paste the output here.
       placeholder: "e.g. 2.4.0"
     validations:
       required: true

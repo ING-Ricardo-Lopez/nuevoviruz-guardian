@@ -2,14 +2,14 @@
 
 > 📖 Back to [README](../README.md)
 
-Full version history for Gentleman Guardian Angel.
+Full version history for NuevoViruz Guardian.
 
 ---
 
 ## v2.8.0 (Latest)
 
 - ✅ **feat**: Windows Git Bash support (MINGW64)
-  - GGA now runs natively on Windows through Git Bash with no special configuration
+  - NVG now runs natively on Windows through Git Bash with no special configuration
   - `bash install.sh` works correctly in MINGW64 environment
   - PATH setup documented for Windows users
   - Platforms badge updated: macOS | Linux | Windows
@@ -28,7 +28,7 @@ Full version history for Gentleman Guardian Angel.
 ## v2.7.0
 
 - ✅ **feat**: Timeout & progress feedback for AI provider calls (#35, based on PR #20 by @ramarivera)
-  - Configurable `TIMEOUT` (default: 300s) with `GGA_TIMEOUT` env override
+  - Configurable `TIMEOUT` (default: 300s) with `NVG_TIMEOUT` env override
   - Visual spinner in TTY mode, periodic text updates in CI/pipes
   - Exit code 124 on timeout with troubleshooting suggestions
   - Generic fallback for unknown/future providers
@@ -61,14 +61,14 @@ Full version history for Gentleman Guardian Angel.
 ## v2.6.0
 
 - ✅ **feat**: Commit message validation support (PR #17, based on #11 by @ramarivera)
-  - `gga install --commit-msg` installs commit-msg hook instead of pre-commit
+  - `nvg install --commit-msg` installs commit-msg hook instead of pre-commit
   - Commit message is automatically included in AI review when available
   - No config needed - behavior is automatic based on context
 - ✅ **fix**: Read from staging area (`git show :file`) to prevent index corruption (#15, #16)
   - Fixes race conditions when files are modified after staging
   - Works correctly with lint-staged, prettier, and other tools
 - ✅ **feat**: Signal handling for graceful cleanup on interruption
-- ✅ `gga uninstall` now handles both pre-commit and commit-msg hooks
+- ✅ `nvg uninstall` now handles both pre-commit and commit-msg hooks
 - ✅ **147 tests** (17 new for commit-msg and staging area fixes)
 
 ---
@@ -126,7 +126,7 @@ Full version history for Gentleman Guardian Angel.
 ## v2.1.0
 
 - ✅ Smart caching system - skip unchanged files
-- ✅ Auto-invalidation when AGENTS.md or .gga changes
+- ✅ Auto-invalidation when AGENTS.md or .nvg changes
 - ✅ Cache commands: `status`, `clear`, `clear-all`
 - ✅ `--no-cache` flag to bypass caching
 
@@ -134,7 +134,7 @@ Full version history for Gentleman Guardian Angel.
 
 ## v2.0.0
 
-- ✅ Renamed to Gentleman Guardian Angel (gga)
+- ✅ Renamed to NuevoViruz Guardian (nvg)
 - ✅ Auto-migration from legacy `ai-code-review` hooks
 - ✅ Homebrew tap distribution
 

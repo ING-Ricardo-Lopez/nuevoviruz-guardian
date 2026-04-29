@@ -1,4 +1,4 @@
-# Contributing to Gentleman Guardian Angel (GGA)
+# Contributing to NuevoViruz Guardian (NVG)
 
 This project follows a **strict issue-first workflow**. No PR is accepted without a linked, approved issue. Read this document before opening any issue or PR.
 
@@ -18,8 +18,8 @@ Every contribution follows these exact steps — no exceptions.
 
 Use the appropriate issue template:
 
-- **[Bug Report](https://github.com/Gentleman-Programming/gentleman-guardian-angel/issues/new?template=bug_report.yml)** — Something is broken
-- **[Feature Request](https://github.com/Gentleman-Programming/gentleman-guardian-angel/issues/new?template=feature_request.yml)** — New feature or improvement
+- **[Bug Report](https://github.com/ING-Ricardo-Lopez/nuevoviruz-guardian/issues/new?template=bug_report.yml)** — Something is broken
+- **[Feature Request](https://github.com/ING-Ricardo-Lopez/nuevoviruz-guardian/issues/new?template=feature_request.yml)** — New feature or improvement
 
 > Blank issues are disabled. You must use a template.
 
@@ -76,7 +76,7 @@ Two sets of checks run automatically on every PR:
 
 | Check | Command |
 |-------|---------|
-| Lint | ShellCheck on `bin/gga` and `lib/*.sh` |
+| Lint | ShellCheck on `bin/nvg` and `lib/*.sh` |
 | Unit Tests | `shellspec spec/unit` |
 | Integration Tests | `shellspec spec/integration/commands_spec.sh` |
 
@@ -159,8 +159,8 @@ For breaking changes, add `!` after the type: `feat!:`, `fix!:`
 
 ```bash
 # Clone the repo
-git clone git@github.com:Gentleman-Programming/gentleman-guardian-angel.git
-cd gentleman-guardian-angel
+git clone git@github.com:ING-Ricardo-Lopez/nuevoviruz-guardian.git
+cd nuevoviruz-guardian
 
 # Install ShellSpec (macOS)
 brew install shellspec

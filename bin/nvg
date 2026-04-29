@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ============================================================================
-# Gentleman Guardian Angel - Provider-agnostic code review using AI
+# NuevoViruz Guardian - Provider-agnostic code review using AI
 # ============================================================================
 # A standalone CLI tool that validates staged files against your project's
 # coding standards using any AI provider (Claude, Gemini, Codex, Ollama, etc.)
@@ -9,7 +9,7 @@
 
 set -e
 
-VERSION="${GGA_VERSION:-dev}"
+VERSION="${NVG_VERSION:-dev}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 LIB_DIR="$(dirname "$SCRIPT_DIR")/lib"
 
@@ -56,14 +56,14 @@ detect_os() {
     *)                echo "linux" ;;
   esac
 }
-GGA_OS=$(detect_os)
+NVG_OS=$(detect_os)
 
 # Defaults
 DEFAULT_FILE_PATTERNS="*"
 DEFAULT_RULES_FILE="AGENTS.md"
 DEFAULT_STRICT_MODE="true"
 DEFAULT_TIMEOUT="300"  # 5 minutes - generous default for large reviews
-UPDATE_CHECK_REPO="Gentleman-Programming/gentleman-guardian-angel"
+UPDATE_CHECK_REPO="ING-Ricardo-Lopez/nuevoviruz-guardian"
 
 # ============================================================================
 # Helper Functions
@@ -102,7 +102,7 @@ check_update() {
     local c="${current_parts[$i]:-0}"
     if (( l > c )); then
       echo -e "${YELLOW}  Update available: v${current} → v${latest}${NC}"
-      echo -e "${YELLOW}  brew update && brew upgrade gga${NC}"
+      echo -e "${YELLOW}  brew update && brew upgrade nvg${NC}"
       return 0
     elif (( l < c )); then
       return 0
@@ -113,7 +113,7 @@ check_update() {
 print_banner() {
   echo ""
   echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
-  echo -e "${CYAN}${BOLD}  Gentleman Guardian Angel v${VERSION}${NC}"
+  echo -e "${CYAN}${BOLD}  NuevoViruz Guardian v${VERSION}${NC}"
   echo -e "${CYAN}  Provider-agnostic code review using AI${NC}"
   check_update
   echo -e "${CYAN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}"
@@ -123,7 +123,7 @@ print_banner() {
 print_help() {
   print_banner
   echo -e "${BOLD}USAGE:${NC}"
-  echo "  gga <command> [options]"
+  echo "  nvg <command> [options]"
   echo ""
   echo -e "${BOLD}COMMANDS:${NC}"
   echo "  run [--no-cache]  Run code review on staged files"
@@ -132,7 +132,7 @@ print_help() {
   echo "                    Install git commit-msg hook (for commit message validation)"
   echo "  uninstall         Remove git hooks from current repo"
   echo "  config            Show current configuration"
-  echo "  init              Create a sample .gga config file"
+  echo "  init              Create a sample .nvg config file"
   echo "  cache clear       Clear cache for current project"
   echo "  cache clear-all   Clear all cached data"
   echo "  cache status      Show cache status"
@@ -148,8 +148,8 @@ print_help() {
   echo "  --diff-only       With --pr-mode: send only diffs (faster, cheaper)"
   echo ""
   echo -e "${BOLD}CONFIGURATION:${NC}"
-  echo "  Create a ${CYAN}.gga${NC} file in your project root or"
-  echo "  ${CYAN}~/.config/gga/config${NC} for global settings."
+  echo "  Create a ${CYAN}.nvg${NC} file in your project root or"
+  echo "  ${CYAN}~/.config/nvg/config${NC} for global settings."
   echo ""
   echo -e "${BOLD}CONFIG OPTIONS:${NC}"
   echo "  PROVIDER           AI provider to use (required)"
@@ -164,24 +164,24 @@ print_help() {
   echo "  PR_BASE_BRANCH     Base branch for --pr-mode (default: auto-detect)"
   echo ""
   echo -e "${BOLD}EXAMPLES:${NC}"
-  echo "  gga init               # Create sample config"
-  echo "  gga install            # Install pre-commit hook (default)"
-  echo "  gga install --commit-msg  # Install commit-msg hook"
-  echo "  gga run                # Run review (with cache)"
-  echo "  gga run --no-cache     # Run review (ignore cache)"
-  echo "  gga run --ci           # Run review in CI (last commit)"
-  echo "  gga run --pr-mode      # Review full PR changes"
-  echo "  gga run --pr-mode --diff-only  # Review PR diffs only"
-  echo "  gga cache status       # Show cache info"
+  echo "  nvg init               # Create sample config"
+  echo "  nvg install            # Install pre-commit hook (default)"
+  echo "  nvg install --commit-msg  # Install commit-msg hook"
+  echo "  nvg run                # Run review (with cache)"
+  echo "  nvg run --no-cache     # Run review (ignore cache)"
+  echo "  nvg run --ci           # Run review in CI (last commit)"
+  echo "  nvg run --pr-mode      # Review full PR changes"
+  echo "  nvg run --pr-mode --diff-only  # Review PR diffs only"
+  echo "  nvg cache status       # Show cache info"
   echo ""
   echo -e "${BOLD}ENVIRONMENT VARIABLES:${NC}"
-  echo "  GGA_PROVIDER      Override provider from config"
-  echo "  GGA_TIMEOUT       Override timeout from config (seconds)"
+  echo "  NVG_PROVIDER      Override provider from config"
+  echo "  NVG_TIMEOUT       Override timeout from config (seconds)"
   echo ""
 }
 
 print_version() {
-  echo "gga v${VERSION}"
+  echo "nvg v${VERSION}"
   check_update
 }
 
@@ -217,11 +217,11 @@ load_config() {
 
   # Load global config first (platform-aware path)
   if [[ -n "${APPDATA:-}" ]]; then
-    GLOBAL_CONFIG="${APPDATA}/gga/config"
+    GLOBAL_CONFIG="${APPDATA}/nvg/config"
   elif [[ -n "${XDG_CONFIG_HOME:-}" ]]; then
-    GLOBAL_CONFIG="${XDG_CONFIG_HOME}/gga/config"
+    GLOBAL_CONFIG="${XDG_CONFIG_HOME}/nvg/config"
   else
-    GLOBAL_CONFIG="$HOME/.config/gga/config"
+    GLOBAL_CONFIG="$HOME/.config/nvg/config"
   fi
   if [[ -f "$GLOBAL_CONFIG" ]]; then
     # shellcheck source=/dev/null
@@ -229,18 +229,18 @@ load_config() {
   fi
 
   # Load project config (overrides global)
-  PROJECT_CONFIG=".gga"
+  PROJECT_CONFIG=".nvg"
   if [[ -f "$PROJECT_CONFIG" ]]; then
     # shellcheck source=/dev/null
     source "$PROJECT_CONFIG"
   fi
 
   # Environment variable overrides everything
-  if [[ -n "$GGA_PROVIDER" ]]; then
-    PROVIDER="$GGA_PROVIDER"
+  if [[ -n "$NVG_PROVIDER" ]]; then
+    PROVIDER="$NVG_PROVIDER"
   fi
-  if [[ -n "${GGA_TIMEOUT:-}" ]]; then
-    TIMEOUT="$GGA_TIMEOUT"
+  if [[ -n "${NVG_TIMEOUT:-}" ]]; then
+    TIMEOUT="$NVG_TIMEOUT"
   fi
 }
 
@@ -257,13 +257,13 @@ cmd_config() {
   
   # Check config sources (platform-aware path)
   if [[ -n "${APPDATA:-}" ]]; then
-    GLOBAL_CONFIG="${APPDATA}/gga/config"
+    GLOBAL_CONFIG="${APPDATA}/nvg/config"
   elif [[ -n "${XDG_CONFIG_HOME:-}" ]]; then
-    GLOBAL_CONFIG="${XDG_CONFIG_HOME}/gga/config"
+    GLOBAL_CONFIG="${XDG_CONFIG_HOME}/nvg/config"
   else
-    GLOBAL_CONFIG="$HOME/.config/gga/config"
+    GLOBAL_CONFIG="$HOME/.config/nvg/config"
   fi
-  PROJECT_CONFIG=".gga"
+  PROJECT_CONFIG=".nvg"
   
   echo -e "${BOLD}Config Files:${NC}"
   if [[ -f "$GLOBAL_CONFIG" ]]; then
@@ -313,7 +313,7 @@ cmd_config() {
 cmd_init() {
   print_banner
   
-  PROJECT_CONFIG=".gga"
+  PROJECT_CONFIG=".nvg"
   
   if [[ -f "$PROJECT_CONFIG" ]]; then
     log_warning "Config file already exists: $PROJECT_CONFIG"
@@ -325,8 +325,8 @@ cmd_init() {
   fi
 
   cat > "$PROJECT_CONFIG" << 'EOF'
-# Gentleman Guardian Angel Configuration
-# https://github.com/your-org/gga
+# NuevoViruz Guardian Configuration
+# https://github.com/your-org/nvg
 
 # AI Provider (required)
 # Options: claude, gemini, codex, opencode, ollama:<model>, lmstudio[:model], github:<model>
@@ -382,13 +382,13 @@ EOF
   log_info "Next steps:"
   echo "  1. Edit $PROJECT_CONFIG to set your preferred provider"
   echo "  2. Create $DEFAULT_RULES_FILE with your coding standards"
-  echo "  3. Run: gga install"
+  echo "  3. Run: nvg install"
   echo ""
 }
 
-# Markers for GGA hook section (used for clean install/uninstall)
-GGA_MARKER_START="# ======== GGA START ========"
-GGA_MARKER_END="# ======== GGA END ========"
+# Markers for NVG hook section (used for clean install/uninstall)
+NVG_MARKER_START="# ======== NVG START ========"
+NVG_MARKER_END="# ======== NVG END ========"
 
 cmd_install() {
   print_banner
@@ -420,77 +420,77 @@ cmd_install() {
   # Ensure hooks directory exists (may not exist in fresh repos)
   mkdir -p "$HOOKS_DIR"
 
-  # Determine the gga run command based on hook type
-  # commit-msg hook receives the commit message file as $1, which GGA uses automatically
-  local gga_run_cmd
+  # Determine the nvg run command based on hook type
+  # commit-msg hook receives the commit message file as $1, which NVG uses automatically
+  local nvg_run_cmd
   if [[ "$hook_type" == "commit-msg" ]]; then
     # shellcheck disable=SC2016 # We intentionally use single quotes - $1 expands when hook runs, not now
-    gga_run_cmd='gga run "$1" || exit 1'
+    nvg_run_cmd='nvg run "$1" || exit 1'
   else
-    gga_run_cmd='gga run || exit 1'
+    nvg_run_cmd='nvg run || exit 1'
   fi
 
   # Check if hook already exists
   if [[ -f "$HOOK_PATH" ]]; then
     # Check for legacy ai-code-review and migrate
     if grep -q "ai-code-review" "$HOOK_PATH"; then
-      log_warning "Found legacy 'ai-code-review' in hook, migrating to 'gga'..."
-      if [[ "$GGA_OS" == "macos" ]]; then
-        sed -i '' 's/ai-code-review/gga/g' "$HOOK_PATH"
-        sed -i '' 's/AI Code Review/Gentleman Guardian Angel/g' "$HOOK_PATH"
+      log_warning "Found legacy 'ai-code-review' in hook, migrating to 'nvg'..."
+      if [[ "$NVG_OS" == "macos" ]]; then
+        sed -i '' 's/ai-code-review/nvg/g' "$HOOK_PATH"
+        sed -i '' 's/AI Code Review/NuevoViruz Guardian/g' "$HOOK_PATH"
       else
-        sed -i 's/ai-code-review/gga/g' "$HOOK_PATH"
-        sed -i 's/AI Code Review/Gentleman Guardian Angel/g' "$HOOK_PATH"
+        sed -i 's/ai-code-review/nvg/g' "$HOOK_PATH"
+        sed -i 's/AI Code Review/NuevoViruz Guardian/g' "$HOOK_PATH"
       fi
-      log_success "Migrated hook to use 'gga'"
+      log_success "Migrated hook to use 'nvg'"
       exit 0
     fi
 
-    # Check if GGA is already installed (using markers)
-    if grep -q "$GGA_MARKER_START" "$HOOK_PATH"; then
-      log_warning "Gentleman Guardian Angel hook already installed in $hook_type"
+    # Check if NVG is already installed (using markers)
+    if grep -q "$NVG_MARKER_START" "$HOOK_PATH"; then
+      log_warning "NuevoViruz Guardian hook already installed in $hook_type"
       exit 0
     fi
     
-    # Existing hook without GGA - insert with markers
-    log_info "Existing $hook_type hook found, adding GGA..."
+    # Existing hook without NVG - insert with markers
+    log_info "Existing $hook_type hook found, adding NVG..."
     
-    # Build the GGA block
-    local gga_block
-    gga_block=$(printf '\n%s\n%s\n%s\n%s' \
-      "$GGA_MARKER_START" \
-      "# Gentleman Guardian Angel - Code Review" \
-      "$gga_run_cmd" \
-      "$GGA_MARKER_END")
+    # Build the NVG block
+    local nvg_block
+    nvg_block=$(printf '\n%s\n%s\n%s\n%s' \
+      "$NVG_MARKER_START" \
+      "# NuevoViruz Guardian - Code Review" \
+      "$nvg_run_cmd" \
+      "$NVG_MARKER_END")
     
     # Check if hook ends with 'exit 0' or 'exit' (with optional whitespace)
-    # If so, insert GGA block before the final exit to ensure it runs
+    # If so, insert NVG block before the final exit to ensure it runs
     if grep -Eq '^[[:space:]]*exit[[:space:]]*[0-9]*[[:space:]]*$' "$HOOK_PATH"; then
       # Find the last exit line and insert before it
       local last_exit_line
       last_exit_line=$(grep -n '^[[:space:]]*exit[[:space:]]*[0-9]*[[:space:]]*$' "$HOOK_PATH" | tail -1 | cut -d: -f1)
       
       if [[ -n "$last_exit_line" ]]; then
-        # Insert GGA block before the last exit line
+        # Insert NVG block before the last exit line
         local temp_file
         temp_file=$(mktemp)
         {
           head -n $((last_exit_line - 1)) "$HOOK_PATH"
-          echo "$gga_block"
+          echo "$nvg_block"
           echo ""
           tail -n +"$last_exit_line" "$HOOK_PATH"
         } > "$temp_file"
         mv "$temp_file" "$HOOK_PATH"
         chmod +x "$HOOK_PATH"
-        log_success "Inserted Gentleman Guardian Angel before exit in $hook_type hook: $HOOK_PATH"
+        log_success "Inserted NuevoViruz Guardian before exit in $hook_type hook: $HOOK_PATH"
         echo ""
         exit 0
       fi
     fi
     
     # No exit statement found, append to end
-    echo "$gga_block" >> "$HOOK_PATH"
-    log_success "Appended Gentleman Guardian Angel to existing $hook_type hook: $HOOK_PATH"
+    echo "$nvg_block" >> "$HOOK_PATH"
+    log_success "Appended NuevoViruz Guardian to existing $hook_type hook: $HOOK_PATH"
     echo ""
     exit 0
   fi
@@ -499,10 +499,10 @@ cmd_install() {
   cat > "$HOOK_PATH" << EOF
 #!/usr/bin/env bash
 
-$GGA_MARKER_START
-# Gentleman Guardian Angel - Code Review
-$gga_run_cmd
-$GGA_MARKER_END
+$NVG_MARKER_START
+# NuevoViruz Guardian - Code Review
+$nvg_run_cmd
+$NVG_MARKER_END
 EOF
 
   chmod +x "$HOOK_PATH"
@@ -529,31 +529,31 @@ cmd_uninstall() {
   for hook_type in "pre-commit" "commit-msg"; do
     local hook_path="$HOOKS_DIR/$hook_type"
     
-    if [[ -f "$hook_path" ]] && grep -q "gga" "$hook_path"; then
+    if [[ -f "$hook_path" ]] && grep -q "nvg" "$hook_path"; then
       found_any=true
       uninstall_from_hook "$hook_path" "$hook_type"
     fi
   done
 
   if [[ "$found_any" == false ]]; then
-    log_warning "Gentleman Guardian Angel hook not found"
+    log_warning "NuevoViruz Guardian hook not found"
   fi
   
   echo ""
 }
 
-# Helper function to uninstall GGA from a specific hook file
+# Helper function to uninstall NVG from a specific hook file
 uninstall_from_hook() {
   local hook_path="$1"
   local hook_name="$2"
 
-  # Check for GGA using markers first (new format)
-  if grep -q "$GGA_MARKER_START" "$hook_path"; then
+  # Check for NVG using markers first (new format)
+  if grep -q "$NVG_MARKER_START" "$hook_path"; then
     # Remove content between markers (inclusive)
-    if [[ "$GGA_OS" == "macos" ]]; then
-      sed -i '' "/$GGA_MARKER_START/,/$GGA_MARKER_END/d" "$hook_path"
+    if [[ "$NVG_OS" == "macos" ]]; then
+      sed -i '' "/$NVG_MARKER_START/,/$NVG_MARKER_END/d" "$hook_path"
     else
-      sed -i "/$GGA_MARKER_START/,/$GGA_MARKER_END/d" "$hook_path"
+      sed -i "/$NVG_MARKER_START/,/$NVG_MARKER_END/d" "$hook_path"
     fi
     
     # Check if file is now empty or only has shebang/whitespace
@@ -561,28 +561,28 @@ uninstall_from_hook() {
     remaining_content=$(grep -Ecv '^#!|^[[:space:]]*$' "$hook_path" || true)
     if [[ "$remaining_content" -eq 0 ]]; then
       rm "$hook_path"
-      log_success "Removed $hook_name hook (was GGA-only)"
+      log_success "Removed $hook_name hook (was NVG-only)"
     else
-      log_success "Removed Gentleman Guardian Angel from $hook_name hook"
+      log_success "Removed NuevoViruz Guardian from $hook_name hook"
     fi
     return
   fi
 
   # Legacy format: check if it's our hook only or mixed
-  if grep -q "^gga run" "$hook_path" && [[ $(wc -l < "$hook_path") -le 6 ]]; then
+  if grep -q "^nvg run" "$hook_path" && [[ $(wc -l < "$hook_path") -le 6 ]]; then
     # It's only our hook, remove the file
     rm "$hook_path"
     log_success "Removed $hook_name hook"
   else
     # Mixed hook, just remove our lines (legacy format)
-    if [[ "$GGA_OS" == "macos" ]]; then
-      sed -i '' '/# Gentleman Guardian Angel/d' "$hook_path"
-      sed -i '' '/gga run/d' "$hook_path"
+    if [[ "$NVG_OS" == "macos" ]]; then
+      sed -i '' '/# NuevoViruz Guardian/d' "$hook_path"
+      sed -i '' '/nvg run/d' "$hook_path"
     else
-      sed -i '/# Gentleman Guardian Angel/d' "$hook_path"
-      sed -i '/gga run/d' "$hook_path"
+      sed -i '/# NuevoViruz Guardian/d' "$hook_path"
+      sed -i '/nvg run/d' "$hook_path"
     fi
-    log_success "Removed Gentleman Guardian Angel from $hook_name hook"
+    log_success "Removed NuevoViruz Guardian from $hook_name hook"
   fi
 }
 
@@ -619,7 +619,7 @@ cmd_cache() {
         echo -e "  Cache directory: ${CYAN}$cache_dir${NC}"
         
         # Check if cache is valid
-        if is_cache_valid "$RULES_FILE" ".gga"; then
+        if is_cache_valid "$RULES_FILE" ".nvg"; then
           echo -e "  Cache validity: ${GREEN}Valid${NC}"
         else
           echo -e "  Cache validity: ${YELLOW}Invalid (rules or config changed)${NC}"
@@ -645,9 +645,9 @@ cmd_cache() {
       log_error "Unknown cache command: $subcommand"
       echo ""
       echo "Available commands:"
-      echo "  gga cache status     - Show cache status"
-      echo "  gga cache clear      - Clear project cache"
-      echo "  gga cache clear-all  - Clear all cache"
+      echo "  nvg cache status     - Show cache status"
+      echo "  nvg cache clear      - Clear project cache"
+      echo "  nvg cache clear-all  - Clear all cache"
       echo ""
       exit 1
       ;;
@@ -699,8 +699,8 @@ cmd_run() {
   if [[ -z "$PROVIDER" ]]; then
     log_error "No provider configured"
     echo ""
-    echo "Configure a provider in .gga or set GGA_PROVIDER"
-    echo "Run 'gga init' to create a config file"
+    echo "Configure a provider in .nvg or set NVG_PROVIDER"
+    echo "Run 'nvg init' to create a config file"
     echo ""
     exit 1
   fi
@@ -770,7 +770,7 @@ cmd_run() {
     if ! pr_range=$(get_pr_range "${PR_BASE_BRANCH:-}"); then
       log_error "Could not determine PR range"
       echo ""
-      echo "Set PR_BASE_BRANCH in your .gga config to specify the base branch."
+      echo "Set PR_BASE_BRANCH in your .nvg config to specify the base branch."
       echo "  Example: PR_BASE_BRANCH=\"main\""
       echo ""
       exit 1
@@ -805,13 +805,13 @@ cmd_run() {
   
   if [[ "$use_cache" == true ]]; then
     # Check if cache is valid, if not invalidate it
-    if ! is_cache_valid "$RULES_FILE" ".gga"; then
+    if ! is_cache_valid "$RULES_FILE" ".nvg"; then
       log_info "Cache invalidated (rules or config changed)"
       invalidate_cache
     fi
     
     # Initialize cache
-    init_cache "$RULES_FILE" ".gga" > /dev/null
+    init_cache "$RULES_FILE" ".nvg" > /dev/null
     cache_initialized=true
     
     # Filter out cached files
@@ -898,7 +898,7 @@ cmd_run() {
     echo "  - Very large changesets (many files)"
     echo "  - Slow network or API rate limiting"
     echo ""
-    echo "Try: Increase TIMEOUT in .gga config, or review fewer files."
+    echo "Try: Increase TIMEOUT in .nvg config, or review fewer files."
     echo ""
     if [[ "$STRICT_MODE" == "true" ]]; then
       exit 1
@@ -1039,8 +1039,8 @@ get_ci_files() {
   local excludes="$2"
   local source_commit="HEAD~1"
 
-  if [[ -n ${GGA_CI_SOURCE_COMMIT:-} ]]; then
-    source_commit="${GGA_CI_SOURCE_COMMIT}"
+  if [[ -n ${NVG_CI_SOURCE_COMMIT:-} ]]; then
+    source_commit="${NVG_CI_SOURCE_COMMIT}"
   fi
 
   # Get files changed in the last commit (for CI environments)

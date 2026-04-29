@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # ============================================================================
-# Gentleman Guardian Angel - PR Mode Functions
+# NuevoViruz Guardian - PR Mode Functions
 # ============================================================================
 # Handles PR-scoped code review:
 # - detect_base_branch(): Auto-detect main/master/develop
@@ -37,7 +37,7 @@ detect_base_branch() {
   done
 
   echo "Error: Could not detect base branch. No main, master, or develop branch found." >&2
-  echo "Set PR_BASE_BRANCH in your .gga config to specify the base branch." >&2
+  echo "Set PR_BASE_BRANCH in your .nvg config to specify the base branch." >&2
   return 1
 }
 
@@ -136,8 +136,8 @@ get_pr_files() {
 
     if [[ "$match" == true && "$excluded" == false ]]; then
       # Only include if file still exists (wasn't deleted)
-      # GGA_SKIP_FILE_CHECK allows unit tests to skip this check
-      if [[ -n "${GGA_SKIP_FILE_CHECK:-}" ]] || [[ -f "$file" ]]; then
+      # NVG_SKIP_FILE_CHECK allows unit tests to skip this check
+      if [[ -n "${NVG_SKIP_FILE_CHECK:-}" ]] || [[ -f "$file" ]]; then
         echo "$file"
       fi
     fi

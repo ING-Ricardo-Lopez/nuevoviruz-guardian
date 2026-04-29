@@ -1,21 +1,21 @@
 #!/usr/bin/env bash
 
 # ============================================================================
-# Gentleman Guardian Angel - Cache Functions
+# NuevoViruz Guardian - Cache Functions
 # ============================================================================
 # Intelligent caching to avoid re-reviewing unchanged files.
 # Cache invalidates when:
 #   - File content changes (hash)
 #   - Rules file (AGENTS.md) changes
-#   - Config file (.gga) changes
+#   - Config file (.nvg) changes
 # ============================================================================
 
 if [[ -n "${LOCALAPPDATA:-}" ]]; then
-  CACHE_DIR="${LOCALAPPDATA}/gga/cache"
+  CACHE_DIR="${LOCALAPPDATA}/nvg/cache"
 elif [[ -n "${XDG_CACHE_HOME:-}" ]]; then
-  CACHE_DIR="${XDG_CACHE_HOME}/gga"
+  CACHE_DIR="${XDG_CACHE_HOME}/nvg"
 else
-  CACHE_DIR="$HOME/.cache/gga"
+  CACHE_DIR="$HOME/.cache/nvg"
 fi
 
 # ============================================================================

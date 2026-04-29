@@ -13,14 +13,14 @@ Describe 'execute_with_timeout()'
   # Force non-TTY mode for consistent testing
   setup() {
     export CI=true
-    export GGA_NO_SPINNER=1
+    export NVG_NO_SPINNER=1
   }
   Before 'setup'
 
   cleanup() {
     unset CI
-    unset GGA_NO_SPINNER
-    unset GGA_TRACE
+    unset NVG_NO_SPINNER
+    unset NVG_TRACE
   }
   After 'cleanup'
 
@@ -105,12 +105,12 @@ Describe 'execute_with_timeout()'
   Describe 'trace mode'
     setup_trace() {
       export CI=true
-      export GGA_NO_SPINNER=1
-      export GGA_TRACE=1
+      export NVG_NO_SPINNER=1
+      export NVG_TRACE=1
     }
     Before 'setup_trace'
 
-    It 'shows trace output when GGA_TRACE is set'
+    It 'shows trace output when NVG_TRACE is set'
       When call execute_with_timeout 5 "TestProvider" echo "test"
       The status should eq 0
       The stderr should include "[TRACE]"
@@ -131,13 +131,13 @@ Describe 'execute_provider_with_timeout()'
 
   setup() {
     export CI=true
-    export GGA_NO_SPINNER=1
+    export NVG_NO_SPINNER=1
   }
   Before 'setup'
 
   cleanup() {
     unset CI
-    unset GGA_NO_SPINNER
+    unset NVG_NO_SPINNER
     unset OLLAMA_HOST
     unset LMSTUDIO_HOST
   }
